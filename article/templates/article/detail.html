@@ -10,6 +10,12 @@
         <p>수정시각 : {{article.updated_at}}</p>
         <hr>
         <a href="{% url 'article:index' %}">목록보기</a>
+        <a href="{% url 'article:update' article.pk %}">수정하기</a>
+        <form action="{% url 'article:delete' article.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제하기">
+        </form>
+        <a href="{%url 'article:index'%}">[back]</a>
     {% else %}
         <p>No article available.</p>
     {%endif%}
