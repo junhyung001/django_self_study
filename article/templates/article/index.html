@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>index</h1>
+    {% if articles %}
+        {% for a in articles %}  <!-- Changed the loop variable name to 'a' -->
+            <p>글 번호 : {{a.id}}</p>  <!-- Updated to 'a.id' for the loop variable -->
+            <p><a href="{% url 'article:detail' pk=a.pk %}">글 제목 : {{a.title}}</a></p>  <!-- Updated to 'a.pk' for the loop variable -->
+            <p>글 내용 : {{a.content}}</p>  <!-- Updated to 'a.content' for the loop variable -->
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No article available.</p>
+    {% endif %}
+
+    <a href="{% url 'article:new' %}">만들기</a>
+{% endblock content %}

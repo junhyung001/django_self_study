@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>DETAIL</h1>
+    {% if article %}
+        <p>글 번호 : {{article.id}}</p>
+        <p>글 내용 : {{article.content}}</p>
+        <p>생성시각 : {{article.created_at}}</p>
+        <p>수정시각 : {{article.updated_at}}</p>
+        <hr>
+        <a href="{% url 'article:index' %}">목록보기</a>
+    {% else %}
+        <p>No article available.</p>
+    {%endif%}
+{% endblock content%}
