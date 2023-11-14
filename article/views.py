@@ -30,12 +30,24 @@ def delete(request, pk):
 
 def edit(request, pk):
     article = Article.objects.get(pk=pk)
-    context = {'article' : article}
+    context = {
+        'article' : article,
+    }
     return render(request, 'article/edit.html', context)
 
 def update(request, pk):
     article = Article.objects.get(pk=pk)
-    article.title = request.POST.get('title')
-    article.content = request.POST.get('content')
-    article.save()
-    return redirect('article:detail', article.pk)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+
+        if title:
+            article.title = title
+            article.content = content
+            article.save()
+            return redirect('article:detail', pk)
+
+    # Handle the case where the form submission was not valid
+    context = {'article': article}
+    return render(request, 'article/edit.html', context)
